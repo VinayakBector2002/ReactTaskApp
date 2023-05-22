@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { Tasks } from "./components/Tasks";
 import AddTask from "./components/AddTask";
+import About from "./components/About";
 
 var GlobalTextID = 3
 
@@ -85,14 +88,24 @@ const onAdd = () => {
   setMenu(!menuGlob)
 }
   return (
+    <Router>
     <div className="container">
       <Header title="Task Tracker" onAdd={onAdd} visibleMenu={menuGlob}/>
-      { menuGlob && <AddTask onAdd={addTask}/> }
-      { (tasksGlob.length > 0 ) ? 
-        <Tasks tasks={tasksGlob} onDelete={deleteTask} onToggle={toggleTask}/> :
-        'No Tasks To Show' 
-      }
+      <Routes>
+      <Route path='/' exact element = {(
+        <>
+          { menuGlob && <AddTask onAdd={addTask}/> }
+          { (tasksGlob.length > 0 ) ? 
+            <Tasks tasks={tasksGlob} onDelete={deleteTask} onToggle={toggleTask}/> :
+            'No Tasks To Show' 
+          }
+        </>
+      )} />
+      <Route path='/about' element={About} />
+      </Routes>
+      <Footer/>
     </div>
+    </Router>
   );
 }
 
