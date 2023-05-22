@@ -1,20 +1,11 @@
-const tasks = [
-    {
-        id: 1,
-        text: 'Sample Text',
-        day: 'Sample Date',
-        reminder: true
-    }
-]
+import Task from "./Task"
 
+export const Tasks = ({ tasks }) => {
 
-export const Tasks = () => {
   return (
     <>
-    {tasks.map((task) => (
-    <h3>
-        {task.text}
-    </h3>
+    {tasks?.map((task) => (
+        <Task task={task}/>
     ))}
     </>
   )
